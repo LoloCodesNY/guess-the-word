@@ -1,14 +1,14 @@
 const guessedLettersElement = document.querySelector(".guessed-letters");
-const guessButton = document.querySelector(".guess");
+const guessLetterButton = document.querySelector(".guess");
 const letterInput = document.querySelector(".letter");
 const wordInProgress = document.querySelector(".word-in-progress");
-const remainingGuesses = document.querySelector(".remaining");
+const remainingGuessesElement = document.querySelector(".remaining");
 const remainingGuessesSpan = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
-const playAgain = document.querySelector(".play-again");
+const playAgainButton = document.querySelector(".play-again");
 
 const word = "magnolia";
-const guessedLetters = [];
+let guessedLetters = [];
 
 const placeholder = function (word) {
     const placeholderLetters = [];
@@ -21,7 +21,7 @@ const placeholder = function (word) {
 
 placeholder(word);
 
-guessButton.addEventListener("click", function (e) {
+guessLetterButton.addEventListener("click", function (e) {
     e.preventDefault();
     message.innerText = "";
     
@@ -40,16 +40,16 @@ const validateInput = function (input) {
     if (input.length === 0) {
         message.innerText = "You have to enter a letter.";
     } else if (input.length > 1) {
-        message.innerText = "You have to enter one letter at a time.";
+        message.innerText = "Enter one letter at a time.";
     } else if (!input.match(acceptedLetter)) {
-        message.innerText = "Please guess a letter between A and Z.";
+        message.innerText = "Please guess a letter from A to Z.";
     } else {
     return input;
     }
 };
 
 const makeGuess = function (guess) {
-    guess = guess.toUppercase;
+    guess = guess.toUpperCase();
     if (guessedLetters.includes(guess)) {
         message.innerText = "You already guessed that letter! Try again.";
     } else {
